@@ -1,4 +1,4 @@
-import websockets
+'import websockets
 import asyncio
 import json
 import time, os
@@ -48,10 +48,10 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
             #        ESPparameters['query'] = '?'
             #else:
              #   ESPparameters['query'] = 'cmd'
-            ESPparameters['query'] = command['question']['value']
-            ESPparameters['state'] = command['state']['value']
+            #ESPparameters['query'] = command['question']['value']
+            #ESPparameters['state'] = command['state']['value']
 
-            ESPparameters['instance'] = command['instance']['value']
+            #ESPparameters['instance'] = command['instance']['value']
             # {"instance": "1", "state": "open", "query":"?"}
             # {"instance": "both", "state": "close", "query":"cmd"}
 
@@ -61,7 +61,7 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
                 print("Device is not connected!")
                 return
             #await self.rwebsocket.send(json.dumps(googleRequestJson))
-            await self.rwebsocket.send(json.dumps(ESPparameters))
+            await self.rwebsocket.send(json.dumps(command))
             #wait for response and send it back to Alexa as is
             self.rddata = await self.rwebsocket.recv()
 
