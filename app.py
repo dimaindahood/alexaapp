@@ -21,8 +21,7 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
 
         # TODO: Check headers etc. to see if we are to upgrade to WS.
         if path == '/ws':
-            # HACK: Put the read data back, to continue with normal WS handling.
-            self.reader.feed_data(bytes(request_line))
+            # HACK: Put the read data back, to continue with normal WS handling            self.reader.feed_data(bytes(request_line))
             self.reader.feed_data(headers.as_bytes().replace(b'\n', b'\r\n'))
 
             return await super(HttpWSSProtocol, self).handler()
@@ -49,7 +48,7 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
             #        ESPparameters['query'] = '?'
             #else:
              #   ESPparameters['query'] = 'cmd'
-            ESPparameters['query'] = command['query']['value']
+            ESPparameters['query'] = command['question']['value']
             ESPparameters['state'] = command['state']['value']
 
             ESPparameters['instance'] = command['instance']['value']
